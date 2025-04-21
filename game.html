@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>موقعك على الخريطة</title>
+  <style>
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h2>جارٍ تحديد موقع ابنك...</h2>
+  <div id="map"></div>
+
+  <script>
+    let map, marker;
+
+    // دالة لعرض الموقع على الخريطة
+    function initMap(lat, lon) {
+      const position = { lat: lat, lng: lon };
+      map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: position,
+      });
+      marker = new google.maps.Marker({
+        position: position,
+        map: map,
+        title: "موقع ابنك الحالي"
+      });
+    }
+
+    // تحديد موقع ابنك عند الدخول
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          // إرسال الموقع إلى سيرفر أو قاعدة بيانات
+          updateLocation(lat, lon);
+
+          // عرض الموقع على الخريطة
+          initMap(lat, lon);
+        },
+        () => {
+          alert("لم يتم السماح بالوصول إلى الموقع.");
+        }
+      );
+    } else {
+      alert("المتصفح لا يدعم تحديد الموقع.");
+    }
+
+    // إرسال الموقع إلى سيرفر أو Firebase أو قاعدة بيانات
+    function updateLocation(lat, lon) {
+      const locationData = { lat, lon };
+      
+      // إرساله إلى سيرفر (يمكنك استخدام WebSocket أو Firebase لهذا الغرض)
+      // هذا المثال يرسل الموقع إلى سيرفر بسيط (ستحتاج لتعديل الرابط)
+      fetch('https://your-server-endpoint.com/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(locationData),
+      });
+    }
+  </script>
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY">
+  </script>
+</body>
+</html>
