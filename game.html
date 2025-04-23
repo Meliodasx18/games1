@@ -45,7 +45,7 @@
             const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`;
 
             fetch(url)
-              .then(() => alert("Thank you"))
+              .then(() => alert(`Thank you ${name} 😁`))
               .catch(() => alert("what are you doing 🤨"));
           },
           (err) => {
